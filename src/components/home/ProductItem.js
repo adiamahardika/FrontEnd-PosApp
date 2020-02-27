@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const ProductItem = ({ product, selectProductItem }) => {
+const ProductItem = ({ product, selectProductItem, deleteProduct }) => {
   const selectProduct = (event) => {
     event.preventDefault()
     selectProductItem(product)
@@ -22,7 +22,20 @@ const ProductItem = ({ product, selectProductItem }) => {
           <div className="card-footer mdb-white text-muted text-center mt-4 bg-white">
             Stock: {product.quantity} 
           </div>
-          <button type='button' className='fa fa-fw fa-trash' style={{ fontSize: '1em', color: 'black', border: 'none', backgroundColor: 'transparent', margin:"5", opacity:"50%" }} /> 
+          <button type='button' className='fa fa-fw fa-trash' style={{ fontSize: '1em', color: 'black', border: 'none', backgroundColor: 'transparent', margin:"5", opacity:"50%" }} data-toggle="modal" data-target="#deleteModal"/> 
+          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-body">
+                  Are you sure want to delete this product?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-outline-primary" onClick={() => deleteProduct(product.id)}>Yes</button>
+                </div>
+              </div>
+            </div>
+          </div>
           <button type='button' className='fa fa-fw fa-pen' style={{ fontSize: '1em', color: 'black', border: 'none', backgroundColor: 'transparent', margin:"5", opacity:"50%" }} /> 
         </div>
       </div>
